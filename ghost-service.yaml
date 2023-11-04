@@ -21,12 +21,12 @@ metadata:
     app: ghost
   name: ghost
 spec:
-  type: LoadBalancer
+  type: ClusterIP
   ports:
     - port: 80
-      targetPort: 80
+      targetPort: 2368
       protocol: TCP
   selector:
-    app: wordpress
+    app: ghost
 # [END gke_ghost_persistent_disks_ghost_service_service_ghost]
 ---

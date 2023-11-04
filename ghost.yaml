@@ -34,15 +34,28 @@ spec:
         - image: ghost:latest
           name: ghost
           env:
-          - name: GHOST_DB_HOST
+          - name: database__connection__host
             value: mysql:3306
-          - name: GHOST_DB_PASSWORD
+          - name: database__connection__user
+            value: ghosttest
+          - name: database__connection__password
             valueFrom:
               secretKeyRef:
-                name: mysql
+                name: mysql-ghosttest
                 key: password
+          - name: datebase__connection__database
+            value: ghosttest
+          - name: url
+            value: https://ghosttest.ducksource.uk
+          resources:
+            limits:
+              cpu: "500m"
+              memory: "1Gi"
+            requests:
+              cpu: "500m"
+              memory: "1Gi"
           ports:
-            - containerPort: 80
+            - containerPort: 2368
               name: ghost
           volumeMounts:
             - name: ghost-persistent-storage
