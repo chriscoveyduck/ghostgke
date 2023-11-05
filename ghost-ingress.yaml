@@ -2,6 +2,10 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: ghosttest-ingress
+  annotations:
+    kubernetes.io/ingress.global-static-ip-name: ghost-blogs-ip
+    networking.gke.io/managed-certificates: ghost-managed-cert
+    kubernetes.io/ingress.class: "gce"
 spec:
   rules:
   - http:

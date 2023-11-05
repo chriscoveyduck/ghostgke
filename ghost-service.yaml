@@ -20,6 +20,9 @@ metadata:
   labels:
     app: ghost
   name: ghost
+  annotations:
+    cloud.google.com/neg: '{"ingress": true}'
+    beta.cloud.google.com/backend-config: '{"default": "ghost-backendconfig"}'
 spec:
   type: ClusterIP
   ports:

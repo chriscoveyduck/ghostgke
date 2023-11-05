@@ -60,6 +60,9 @@ spec:
           volumeMounts:
             - name: ghost-persistent-storage
               mountPath: /var/lib/ghost/content
+            securityContext:
+              runAsNonRoot: true
+              allowPrivilegeEscalation: false
       volumes:
         - name: ghost-persistent-storage
           persistentVolumeClaim:

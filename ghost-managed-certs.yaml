@@ -1,0 +1,8 @@
+apiVersion: networking.gke.io/v1
+kind: ManagedCertificate
+metadata:
+  name: ghost-managed-cert
+spec:
+  domains:
+    - FQDN_1
+    - FQDN_2

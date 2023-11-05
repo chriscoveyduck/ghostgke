@@ -41,21 +41,22 @@ spec:
                 secretKeyRef:
                   name: mysql
                   key: password
+            - name: performance_schema
+              value: off
           resources:
-            limits:
-              cpu: "500m"
-              ephemeral-storage: "1Gi"
-              memory: "1Gi"
             requests:
               cpu: "500m"
               ephemeral-storage: "1Gi"
-              memory: "1Gi"
+              memory: "512Mi"
           ports:
             - containerPort: 3306
               name: mysql
           volumeMounts:
             - name: mysql-persistent-storage
               mountPath: /var/lib/mysql
+          securityContext:
+              runAsNonRoot: true
+              allowPrivilegeEscalation: false
       volumes:
         - name: mysql-persistent-storage
           persistentVolumeClaim:
