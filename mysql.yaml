@@ -42,7 +42,7 @@ spec:
                   name: mysql
                   key: password
             - name: performance_schema
-              value: off
+              value: "off"
           resources:
             requests:
               cpu: "500m"

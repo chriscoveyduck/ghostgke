@@ -33,36 +33,22 @@ spec:
       containers:
         - image: ghost:latest
           name: ghost
-          env:
-          - name: database__connection__host
-            value: mysql:3306
-          - name: database__connection__user
-            value: ghosttest
-          - name: database__connection__password
-            valueFrom:
-              secretKeyRef:
-                name: mysql-ghosttest
-                key: password
-          - name: datebase__connection__database
-            value: ghosttest
-          - name: url
-            value: https://ghosttest.ducksource.uk
+          envFrom:
+          - secretRef:
+            name: <GHOST_K8S_SECRET_NAME>
           resources:
-            limits:
-              cpu: "500m"
-              memory: "1Gi"
             requests:
               cpu: "500m"
-              memory: "1Gi"
+              memory: "512Mi"
           ports:
             - containerPort: 2368
               name: ghost
           volumeMounts:
             - name: ghost-persistent-storage
               mountPath: /var/lib/ghost/content
-            securityContext:
-              runAsNonRoot: true
-              allowPrivilegeEscalation: false
+          securityContext:
+            runAsNonRoot: true
+            allowPrivilegeEscalation: false
       volumes:
         - name: ghost-persistent-storage
           persistentVolumeClaim:
